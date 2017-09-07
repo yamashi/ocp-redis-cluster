@@ -11,6 +11,8 @@ RUN groupadd -r redis && useradd -r -g redis -d /home/redis -m redis
 RUN yum update -y && \
 yum install -y make gcc rubygems nmap-ncat && yum clean all
 
+CMD ruby --version
+
 RUN echo "151.101.64.70 rubygems.org">> /etc/hosts && \
 gem install redis
 
