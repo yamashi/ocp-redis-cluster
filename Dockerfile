@@ -13,6 +13,18 @@ yum install -y make gcc rubygems nmap-ncat && yum clean all
 
 CMD ruby --version
 
+WORKDIR /tmp/
+
+RUN curl https://cache.ruby-lang.org/pub/ruby/2.3/ruby-2.3.0.tar.gz -o /tmp/ruby-2.3.0.tar.gz
+RUN echo "ba5ba60e5f1aa21b4ef8e9bf35b9ddb57286cb546aac4b5a28c71f459467e507 /tmp/ruby-2.3.0.tar.gz" > /tmp/ruby-2.3.0-sha256sum
+RUN sha256sum -c /tmp/ruby-2.3.0-sha256sum
+RUN tar xf /tmp/ruby-2.3.0.tar.gz
+RUN /tmp/ruby-2.3.0/configure
+RUN make
+RUN make install
+
+RUN rm -rf /tmp/*
+
 RUN echo "151.101.64.70 rubygems.org">> /etc/hosts && \
 gem install redis
 
